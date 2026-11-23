@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aziz Hussain</title>
+<meta name="description" content="Aziz Hussain: ECE student at NIT Silchar and frontend developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single readable column on a faint PCB grid; a square-wave trace runs under the name like a scope capture. */
+:root {
+  --bg: #eef2ef;
+  --surface: #f8faf8;
+  --fg: #12261d;
+  --muted: #52675d;
+  --line: #cbd7d0;
+  --accent: #b2602a;      /* copper trace */
+  --accent-soft: #f1e2d6;
+  --grid: rgba(18, 38, 29, 0.05);
+  --font-display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1a15; --surface: #15231c; --fg: #e3ece6; --muted: #93a89c;
+    --line: #26392f; --accent: #e08a50; --accent-soft: #2d241b; --grid: rgba(227, 236, 230, 0.04);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1a15; --surface: #15231c; --fg: #e3ece6; --muted: #93a89c;
+  --line: #26392f; --accent: #e08a50; --accent-soft: #2d241b; --grid: rgba(227, 236, 230, 0.04);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 56px 40px; display: flex; flex-direction: column; gap: 56px; }
+
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 18px; }
+.tag { font-family: var(--font-mono); font-size: 13px; color: var(--muted); letter-spacing: 0.04em; }
+.tag b { color: var(--accent); font-weight: 500; }
+h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(44px, 9vw, 76px); line-height: 0.95; letter-spacing: -0.03em;
+  margin: 0; text-wrap: balance;
+}
+.trace { width: 100%; max-width: 100%; height: 44px; display: block; }
+.trace path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: miter; stroke-dasharray: 1400; stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .trace path { animation: draw 1.6s ease-out both; }
+  @keyframes draw { from { stroke-dashoffset: 1400; } to { stroke-dashoffset: 0; } }
+}
+.lede { font-size: 19px; max-width: 58ch; margin: 0; color: var(--fg); }
+.lede span { color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 14px;
+  padding: 9px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--fg); text-decoration: none; cursor: pointer;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn.primary:hover { filter: brightness(1.08); color: var(--bg); }
+
+/* Sections */
+section { display: flex; flex-direction: column; gap: 20px; }
+h2 {
+  font-family: var(--font-mono); font-weight: 500; font-size: 13px;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+  margin: 0; display: flex; align-items: center; gap: 12px;
+}
+h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+h3 { font-family: var(--font-display); font-weight: 600; font-size: 21px; margin: 0; letter-spacing: -0.01em; }
+
+.projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
+.project {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0;
+}
+.project p { margin: 0; color: var(--muted); font-size: 15px; }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+.chip { font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+
+.skills { display: grid; grid-template-columns: 130px 1fr; gap: 10px 20px; margin: 0; }
+@media (max-width: 480px) { .skills { grid-template-columns: 1fr; gap: 2px; } .skills dd { margin-bottom: 10px; } }
+.skills dt { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 2px; }
+.skills dd { margin: 0; }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.timeline li {
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 16px;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+}
+.timeline li:first-child { padding-top: 0; }
+.timeline .where { font-weight: 600; }
+.timeline .what { color: var(--muted); font-size: 15px; grid-column: 1; }
+.timeline .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; grid-row: 1 / span 2; grid-column: 2; align-self: center; }
+.score { font-family: var(--font-mono); font-size: 13px; color: var(--accent); }
+
+.plain { margin: 0; max-width: 62ch; }
+
+.contact {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 24px; display: flex; flex-direction: column; gap: 14px;
+}
+.contact p { margin: 0; }
+.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.email { font-family: var(--font-mono); font-size: 16px; user-select: all; overflow-wrap: anywhere; }
+.status { font-family: var(--font-mono); font-size: 12px; color: var(--accent); min-height: 1em; }
+
+footer { font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="tag"><b>●</b> B.Tech ECE · NIT Silchar · Assam, India</div>
+    <h1>Aziz Hussain</h1>
+    <svg class="trace" viewBox="0 0 700 44" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 34 H60 V10 H110 V34 H160 V10 H210 V34 H330 V10 H350 V34 H370 V10 H390 V34 H520 V10 H600 V34 H700"/>
+    </svg>
+    <p class="lede">I'm an Electronics and Communication Engineering student who builds things for the web. <span>Right now that means responsive frontends in HTML, CSS and JavaScript, along with steady practice in C++ and data structures.</span></p>
+    <nav class="links" aria-label="Profiles">
+      <a class="btn primary" href="https://github.com/iazizkind" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/aziz-hussain-1a9310247/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="projects-h">
+    <h2 id="projects-h">Projects</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>To-Do List</h3>
+        <p>A responsive task manager. You can add, edit and delete tasks, and the list updates instantly.</p>
+        <div class="stack"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span></div>
+      </article>
+      <article class="project">
+        <h3>Password Generator</h3>
+        <p>Generates secure 12-character passwords, with one-click copy to the clipboard.</p>
+        <div class="stack"><span class="chip">JavaScript</span><span class="chip">Clipboard API</span></div>
+      </article>
+      <article class="project">
+        <h3>Weather App</h3>
+        <p>Looks up any city and shows its current conditions, fetched live from a public weather API.</p>
+        <div class="stack"><span class="chip">REST API</span><span class="chip">fetch</span><span class="chip">JS</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills</h2>
+    <dl class="skills">
+      <dt>Languages</dt><dd>C, C++, HTML, CSS, JavaScript</dd>
+      <dt>Focus</dt><dd>Data Structures &amp; Algorithms, Web Development</dd>
+      <dt>Tools</dt><dd>Git, VS Code, Chrome DevTools</dd>
+      <dt>Working style</dt><dd>Problem solving, debugging, communication, teamwork</dd>
+    </dl>
+  </section>
+
+  <section aria-labelledby="edu-h">
+    <h2 id="edu-h">Education</h2>
+    <ul class="timeline">
+      <li>
+        <span class="where">National Institute of Technology, Silchar</span>
+        <span class="what">B.Tech, Electronics &amp; Communication Engineering · <span class="score">CGPA 7.5</span></span>
+        <span class="when">2024 – 2028</span>
+      </li>
+      <li>
+        <span class="where">Ajmal Senior Secondary School</span>
+        <span class="what">Higher Secondary (HSC) · <span class="score">89%</span></span>
+        <span class="when">2022</span>
+      </li>
+      <li>
+        <span class="where">Shree Manta Shankardev Jatiya Vidyalaya</span>
+        <span class="what">Secondary School (SSC) · <span class="score">88%</span></span>
+        <span class="when">2020</span>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="cert-h">
+    <h2 id="cert-h">Certification &amp; interests</h2>
+    <p class="plain"><strong>Python Bootcamp, Udemy.</strong> I completed Dr. Angela Yu's course and built several small Python projects along the way.</p>
+    <p class="plain">Outside coursework I follow web development, startups and entrepreneurship, and competitive programming.</p>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <h2 id="contact-h">Contact</h2>
+    <div class="contact">
+      <p>I'm open to internships, projects and collaborations. Email is the best way to reach me.</p>
+      <div class="email-row">
+        <span class="email" id="email">iazizhussain2003@gmail.com</span>
+        <button class="btn" id="copy-email" type="button">Copy email</button>
+      </div>
+      <div class="status" id="copy-status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <footer>© 2026 Aziz Hussain · Biswanath, Assam</footer>
+</main>
+
+<script>
+document.getElementById('copy-email').addEventListener('click', function () {
+  var text = document.getElementById('email').textContent;
+  var status = document.getElementById('copy-status');
+  function fallback() {
+    var r = document.createRange();
+    r.selectNodeContents(document.getElementById('email'));
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    status.textContent = 'Selected. Press Ctrl+C (or ⌘C) to copy.';
+  }
+  try {
+    navigator.clipboard.writeText(text).then(function () {
+      status.textContent = 'Copied to clipboard.';
+    }, fallback);
+  } catch (e) { fallback(); }
+});
+</script>
+</body>
+</html>
